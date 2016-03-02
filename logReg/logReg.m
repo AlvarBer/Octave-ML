@@ -180,32 +180,29 @@ function [theta] = logReg(posExamples,negExamples,lCurves)
 	printf('Time elapsed: %10.2f\n',ellapsedTime);
 end
 
-%===============================================================================
+%==============================================================================
 
 % Training function
 function [theta,cost] = lr_training(X,y,lambda,maxIterations)
 	m = length(y);
 	n = length(X(1,:));
 
-	% Adding a column of ones to X
-	X = [ones(m,1),X];
+	X = [ones(m,1),X]; % Adding a column of ones to X
 
 	initial_theta = zeros(n + 1, 1);
 	theta = initial_theta;
 
 	% Optimization
 	options = optimset('GradObj','on','MaxIter',maxIterations);
-	[theta,cost] = fminunc(@(t)(lr_costFunction(t,X,y,lambda)), initial_theta,
-																																			options);
-
+	[theta,cost] = fminunc(@(t)(lr_costFunction(t,X,y,lambda)), ... 
+	                       initial_theta,options);
 end
 
-%===============================================================================
+%==============================================================================
 
 % Cost Function
 function [J,grad] = lr_costFunction (theta,X,y,lambda)
-	% Disable warnings
-	warning ('off');
+	warning ('off'); % Disable warnings
 
 	m = length(y);
 	n = length(X(1,:));
@@ -221,8 +218,7 @@ function [J,grad] = lr_costFunction (theta,X,y,lambda)
 
 	grad = grad + regularizationTerm2';
 
-	% We have to transpose the gradient because fmincg likes it that way
-	grad = grad';
+	grad = grad'; % Transpose the gradient because fmincg
 end
 
 %==============================================================================
@@ -234,30 +230,29 @@ function [result] = lr_hFunction (X,theta)
 end
 
 %==============================================================================
+
 % Function to classify examples
 function prediction = lr_prediction(X, theta, threshold)
-	% Adding a column of ones to X
-	m = length(X(:,1));
+	m = length(X(:,1)); % Adding a column of ones to X
 	X = [ones(m,1),X];
 
 	prediction = lr_hFunction(X,theta);
   prediction = prediction > threshold;
-
 end
 
 %==============================================================================
+
 % Function to extract the precision and the recall of a trained model given a
 % threshold
 function [precision,recall,fscore] = lr_precisionRecall(X, y,theta,threshold)
-	% Get the predicted y values
-	pred_y = lr_prediction(X, theta,threshold);
+	pred_y = lr_prediction(X, theta,threshold); % Get the predicted y values
 
 	% Precision calculation
 	true_positives = sum(pred_y & y); % Logic AND to extract the predicted
 										% positives that are true
 	pred_positives = sum(pred_y);
 
-	if(pred_positives != 0)
+	if (pred_positives != 0)
 		precision = true_positives / pred_positives;
 	else
 		precision = 0;
@@ -267,24 +262,22 @@ function [precision,recall,fscore] = lr_precisionRecall(X, y,theta,threshold)
 	actual_positives = sum(y);
 	test = [pred_y,y,pred_y&y];
 
-	if(actual_positives != 0)
+	if (actual_positives != 0)
 		recall = true_positives / actual_positives;
 	else
 		recall = 0;
 	end
 
 	% F-score calculation
-	fscore =  (2*precision*recall) / (precision + recall);
-
+	fscore = (2*precision*recall) / (precision + recall);
 end
 
 %==============================================================================
+
 % Function to extract the optimum threshold that guarantees the best trade-off
 % between precision and the recall of a trained model
 function [opt_threshold,precision,recall,fscore] = lr_optRP(X, y,theta)
-
-	% Try values from 0.01 to 1 in intervals of 0.01
-	for i = 1:100
+	for i = 1:100 % Try values from 0.01 to 1 in intervals of 0.01
 		[precisions(i),recalls(i),fscores(i)] = lr_precisionRecall(X, y,theta,
 			i/100);
 	end
@@ -299,10 +292,10 @@ function [opt_threshold,precision,recall,fscore] = lr_optRP(X, y,theta)
 
 	% Show the graphics of the recall-precision results
 	G_lr_RecallPrecision(recalls,precisions,opt_threshold);
-
 end
 
 %==============================================================================
+
 % Function to extract the optimum threshold that guarantees the maximum number
 % of hits given a trained model over a set of examples
 function [opt_threshold,max_hits] = lr_optAccuracy(X, y,theta)

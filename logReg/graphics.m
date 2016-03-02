@@ -1,15 +1,10 @@
 1;
-%===============================================================================
-
-%Relationship between the evolution of the error over the training examples and
-%validation examples as we increase the number of training examples
-
+% Relationship between the evolution of the error over the training examples and
+% validation examples as we increase the number of training examples
 function [] = G_lr_LearningCurves(X,errTraining, errValidation,learningFreq)
-	
 	figure;
 	
-	%Number of training examples
-	m = rows(X);
+	m = rows(X); % Number of training examples
 	mVector = [1:columns(errTraining)];
 	
 	iterationsStr = sprintf('Iterations (x%i)', learningFreq);
@@ -20,18 +15,16 @@ function [] = G_lr_LearningCurves(X,errTraining, errValidation,learningFreq)
 	plot(mVector,errValidation,'color','g','Linewidth', 2);
 	legend('Error training','Error validation');
 	hold off;
-	title('Learning curves in logistic regression')
+	title('Learning curves in logistic regression')	
+end
 	
-	endfunction
-	
-%===============================================================================
+%==============================================================================
 
-%Plots a function that shows the relationship between the evolution of the error
-%over the training examples and adjustment examples as we increase the lambda
-%value
+% Plots a function that shows the relationship between the evolution of the error
+% over the training examples and adjustment examples as we increase the lambda
+% value
 
 function [] = G_lr_Adjustment(errTraining, errAdjustment,lambdaValues)
-	
 	figure;
 	
 	plot(lambdaValues,errTraining,'color','b','Linewidth', 2);
@@ -42,16 +35,14 @@ function [] = G_lr_Adjustment(errTraining, errAdjustment,lambdaValues)
 	legend('Error training','Error adjustment');
 	hold off;
 	title('Adjustment process in logistic regression')
-	
-endfunction
+end
 
-%===============================================================================
+%==============================================================================
 
-%Plots a function that shows the relationship between increasing the threshold
-%and the evolution of the precision and the recall. Also points the optimum
-%threshold
+% Plots a function that shows the relationship between increasing the threshold
+% and the evolution of the precision and the recall. Also points the optimum
+% threshold
 function [] = G_lr_RecallPrecision(recalls,precisions,opt_threshold)
-
 	figure;
 	plot([0.01:0.01:1],recalls,'color', 'b','linewidth',2);
 	xlabel('Threshold');
@@ -63,15 +54,13 @@ function [] = G_lr_RecallPrecision(recalls,precisions,opt_threshold)
 	legend('Recall','Precision', 'Optimum threshold');
 	hold off;
 	title('Recall/Precision with logistic regression')
+end
 
-endfunction
+%==============================================================================
 
-%===============================================================================
-
-%Plots a function that shows the relation between increasing the threshold and
-%the evolution of the precision and the recall. Also points the optimum threshold
+% Plots a function that shows the relation between increasing the threshold and
+% the evolution of the precision and the recall. Also points the optimum threshold
 function [] = G_lr_Accuracy(hits,opt_threshold,m)
-
 	figure;
 	percentages = (hits./m).*100;
 	plot([0.01:0.01:1],percentages,'color', 'b','linewidth',2);
@@ -83,7 +72,4 @@ function [] = G_lr_Accuracy(hits,opt_threshold,m)
 	legend('Percentage of hits','Optimum threshold');
 	hold off;
 	title('Accuracy with logistic regression');
-
-endfunction
-
-%===============================================================================
+end

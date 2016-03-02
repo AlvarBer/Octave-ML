@@ -1,9 +1,10 @@
 1;
-%--------------------------------------------------------------------------
-%Function that calculates the error produced over the training examples and the Validation
-%examples by the increasing subsets of X and y. This allow as to analize the bias/variance
-%or our training algorithm. Also returns the final trained theta for practical purposes
 
+%{
+	Function that calculates the error produced over the training examples and the Validation
+	examples by the increasing subsets of X and y. This allow as to analyze the bias/variance
+	or our training algorithm. Also returns the final trained theta for practical purposes
+%}
 function [errTraining,errValidation,Theta1,Theta2] = nn_learningCurves(X,y, ...
 	Xval,yval,num_inputs,num_hidden,lambda,initial_params_nn,learningFreq,max_iterations);
 	
