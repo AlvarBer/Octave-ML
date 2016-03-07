@@ -1,4 +1,5 @@
 1;
+
 source('logReg/lr_learningCurves.m');
 source('logReg/lr_adjustment.m');
 source('logReg/graphics.m');
@@ -8,7 +9,6 @@ warning('off');
 
 % Main function of the logistic regression analysis
 function [theta] = logReg(posExamples,negExamples,lCurves)
-
 	%--------------------------------------------------------------------------
 	% PARAMETERS
 	normalize = false; % Normalize the data or not

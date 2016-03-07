@@ -1,4 +1,5 @@
 1;
+
 %source('svm/svm_learningCurves.m');
 source('svm/graphics.m');
 source('extra/gaussianKernel.m');
@@ -395,6 +396,7 @@ function [model] = svmTrain(X, Y, C,output, kernelFunction,...
 end
 
 %==============================================================================
+
 %{
 	SVMPREDICT returns a vector of predictions using a trained SVM model
 	(svmTrain).
@@ -406,7 +408,6 @@ end
 	Check if we are getting a column vector, if so, then assume that we only
 	need to do prediction for a single example
 %}
-
 function pred = svmPredict(model, X)
 	if (size(X, 2) == 1)
 		% Examples should be in rows

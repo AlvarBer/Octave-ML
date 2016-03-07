@@ -1,17 +1,22 @@
+1;
+
 %{
 	Function in charge of loading data for BINARY classification in memory
 	Just need to have the Y column as the last column.
 	This function rearrange the data in positive and negative examples and returns
 	two sets (positive (1) or negative (0))
 %}
-function [posExamples,negExamples] = getData(percentageData)
-    error('Unimplemented data Extraction Method')
+function [posExamples, negExamples] = getData(file, percentageData)
+
+	if ~exist(file, type='file')
+		error('Input file doesn''t exists')
+	end
 
 	printf('Loading data...');
 	fflush(stdout);
 
 	% Loads the raw data (normal or lite) from the data folder
-	DATA = importdata('data/raw-data.csv',',',1);
+	DATA = importdata(file,',',1);
 
 	% Separate the parts of the CSV file
 	data = DATA.data;
@@ -36,9 +41,20 @@ function [posExamples,negExamples] = getData(percentageData)
 	mNeg = rows(negExamples);
 
 	% Get the proper percentage
+	percentageData = percentageData;
 	posExamples = posExamples(1:mPos*percentageData,:);
 	negExamples = negExamples(1:mNeg*percentageData,:);
-	printf('\nNumber of positive examples: %i (%d %%)\n',mPos,(((mPos)/rows(data))*100));
-	printf('Number of negative examples: %i (%d %%)\n',mNeg,(((mNeg)/rows(data))*100));
-	printf('Total number of examples: %i\n\n', rows(data));
+	printf('\nNumber of total positive examples: %i (%d %%)\n',mPos,(((mPos)/rows(data))*100));
+	printf('Number of total negative examples: %i (%d %%)\n',mNeg,(((mNeg)/rows(data))*100));
+	printf('Total number of examples: %i\n', rows(data));
+	printf('Number of selected positive examples: %i (%d %%)\n',rows(posExamples),(((rows(posExamples))/rows(data))*100));
+	printf('Number of selected negative examples: %i (%d %%)\n',rows(negExamples),(((rows(negExamples))/rows(data))*100));
+	printf('Selected number of examples: %i\n\n', rows(posExamples) + rows(negExamples));
+end
+
+%{
+	Filters a given matrix by a specific value on a given attribute:
+%}
+function filtered = filterByAttr(matrix, attribute, value)
+	filtered = matrix(find(matrix(:,attribute) == value),:);
 end

@@ -1,4 +1,5 @@
 1;
+
 % Relationship between the evolution of the error over the training examples and
 % validation examples as we increase the number of training examples
 function [] = G_lr_LearningCurves(X,errTraining, errValidation,learningFreq)
@@ -23,7 +24,6 @@ end
 % Plots a function that shows the relationship between the evolution of the error
 % over the training examples and adjustment examples as we increase the lambda
 % value
-
 function [] = G_lr_Adjustment(errTraining, errAdjustment,lambdaValues)
 	figure;
 	

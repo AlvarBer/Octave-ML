@@ -1,4 +1,5 @@
 1;
+
 source('neuralNetwork/nn_learningCurves.m');
 source('neuralNetwork/nn_adjustment.m');
 source('neuralNetwork/graphics.m');
@@ -298,7 +299,7 @@ end
 
 %==============================================================================
 
-%Function that selects the best initial weight matrix for the neural network training
+% Function that selects the best initial weight matrix for the neural network training
 function [initial_params_nn] = nn_initParams(X_tra,Y_tra,num_inputs, num_hidden,lambda,rand_weights_iterations);
 	printf('Calculating initial weights...\n');
 	max_iterations=15;
@@ -329,18 +330,17 @@ end
 %==============================================================================
 
 function [hypothesis] = nn_hFunction(X,Theta1,Theta2)
-
-a1 = [ones(rows(X), 1), X];
-z2 = (Theta1 * a1');
-a2 = sigmoidFunction(z2);
-
-a2 = [ones(1, columns(a2)); a2];
-z3 = Theta2 * a2;
-a3 = sigmoidFunction(z3);
-
-hypothesis = a3';
-
+	a1 = [ones(rows(X), 1), X];
+	z2 = (Theta1 * a1');
+	a2 = sigmoidFunction(z2);
+	
+	a2 = [ones(1, columns(a2)); a2];
+	z3 = Theta2 * a2;
+	a3 = sigmoidFunction(z3);
+	
+	hypothesis = a3';
 end
+
 %==============================================================================
 
 % Function to classify examples
@@ -402,7 +402,6 @@ function [opt_threshold,precision,recall,fscore] = nn_optRP(X, y,Theta1, Theta2)
 
 	% Show the graphics of the recall-precision results
 	G_nn_RecallPrecision(recalls,precisions,opt_threshold);
-
 end
 
 %==============================================================================
@@ -420,12 +419,11 @@ function [opt_threshold,max_hits] = nn_optAccuracy(X, y,Theta1,Theta2)
 
 	% Show the graphics of the recall-precision results
 	G_nn_Accuracy(hits,opt_threshold,rows(X));
-
 end
 
 %==============================================================================
 
 % Function to calculate the error produced by Theta1,Theta2 over a set of examples
-function error= nn_getError(X, y, Theta1, Theta2,params_nn, num_inputs, num_hidden)
+function error = nn_getError(X, y, Theta1, Theta2,params_nn, num_inputs, num_hidden)
 	error = nn_costFunction(params_nn, num_inputs, num_hidden, 1,X, y,0);
 end

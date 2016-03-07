@@ -73,7 +73,7 @@ end
 
 %==============================================================================
 
-%Relationship between the probability of chosing the right output value
+% Relationship between the probability of chosing the right output value
 function [] = G_nn_probPredictions(X,Theta1,Theta2)
 	prediction = nn_hFunction(X,Theta1, Theta2)';
 	posPrediction = prediction(1,:);
@@ -91,8 +91,8 @@ function [] = G_nn_probPredictions(X,Theta1,Theta2)
 	title('Recall/Precision with neural networks')
 end
 
-
 %===============================================================================
+
 % Plots a function that shows the relation between increasing the threshold and
 % the evolution of the precision and the recall. Also points the optimum threshold
 function [] = G_nn_Accuracy(hits,opt_threshold,m)

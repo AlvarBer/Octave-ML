@@ -1,4 +1,5 @@
 1;
+
 %{
 	Function that calculates the error produced over the training examples and 
 	the Validation examples by the increasing subsets of X and y. This allow as to 
