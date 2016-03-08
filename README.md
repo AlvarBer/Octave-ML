@@ -1,35 +1,43 @@
+Octave Machine Learning API
+===========================
 
-#Bank Marketing Machine Learning
+Introduction
+------------
 
-##Introduction
-**BMML** is the final project for the subject Machine Learning teached at Universidad
- Complutense de Madrid.
+**Octave ML API** is a Machine Learning API written in Octave/MATLAB with an 
+emphasis on simplicity and ease of use.
 
-This isn't a tool as such, but a compilation of different classification
-techniques of Machine Learning that allows to do a prediction about if a client
-will subscribe a term deposit given several attributes
+Each one of the estimators here can be used with a single line of code and has 
+many arguments that can be easily tweaked under the hood such as adjustment of 
+hyper-parameters, Stratified K-Fold, or train/adjust/test split.
 
-In addition, this repository can be used as a very basic Machine Learning framework
-to do basic predictions using the API of the program.
-
-The three techniques used in this study are the following ones:
+The estimators that are implemented right now are:
 
 * Logistic Regression
 * Neural Networks
 * Support Vector Machines
 
-##Basic requirements
-The program is written in [Octave](https://www.gnu.org/software/octave/download.html), so you will need to have it installed in your computer.
+![Demo](https://cloud.githubusercontent.com/assets/9200682/12464641/4babce0a-bfca-11e5-8c96-3eb4b27c2307.png)
 
-##Geting Started
-* Checkout the source: `$ git clone https://github.com/franloza/BMML.git`
-* Adapt the function [getData()](/data/getData.m) to return the positive and the negative examples
+Basic requirements
+------------------
+The program is written in [Octave][Octave Download], so you will need to have 
+it installed in your computer.
+
+We tried to remain close to MATLAB only syntax and we will try to get to 100% 
+cross-compatibility in the future, but for now there are some chunks of code 
+that remain Octave-only.
+
+Getting Started
+--------------
+* Checkout the source: `$ git clone https://github.com/AlvarBer/Octave-ML`
+* Adapt function [getData()][getData file] to return both positive and negative examples
 * Configure the parameters for each algorithm
-* Comment/Decomment the algorithms you want to use in `main.m`
+* Comment/Uncomment the algorithms you want to use in `main.m`
 * Run `$ octave main.m`
 
-##General API
-
+How to use
+----------
 ```matlab
 #Index Analysis using logistic regression
 theta = logReg(posExamples,negExamples,lCurves);
@@ -39,16 +47,16 @@ theta = neuralNetwork(posExamples,posExamples,lCurves);
 
 #Index Analysis using Support Vector Machines
 model = svm(posExamples,negExamples);
-
 ```
 
-#Features
+Detailed Features
+-----------------
 * Enable learning curves
 * Select the portion of total data to be used
 * Data is equally distributed in positive and negative examples
 * Normalization support
 * Select distribution of examples in percentages (Training/Validation/Adjustment)
-* Select range of lambda values to be used in adjustment (Only LogReg and Neural Netwroks)
+* Select range of lambda values to be used in adjustment (Only LogReg and Neural Networks)
 * Select minimum degree of certainty required (Threshold)
 * Select the learning rate of the learning curves (Granularity of the graphics)
 * Select maximum number of iterations in the training process
@@ -58,19 +66,14 @@ model = svm(posExamples,negExamples);
 * Select default sigma value (Only SVM)
 * Select the range of C and sigma values to be used in the adjustment process (Only SVM)
 
-##Demo
-![Demo](https://cloud.githubusercontent.com/assets/9200682/12464641/4babce0a-bfca-11e5-8c96-3eb4b27c2307.png)
+Special Thanks to
+-----------------
+Fran Loza by starting the original API for his [final Machine Learning Project][BMML]
 
-##Data Set
-The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed.
+License
+-------
+Octave ML API is released under the MIT License. For more information, see the [License](LICENSE)
 
-##External references
-The dataset used for this practice has been downloaded from the
-[UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)
-corresponding to the **Bank Marketing Data Set**
-
-Moreover, there is a paper that make reference to this data set:
-[S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems](http://repositorium.sdum.uminho.pt/bitstream/1822/30994/1/dss-v3.pdf)
-
-##License
-BMML is released under the MIT License. For more information, see the [License](LICENSE);
+[Octave Download]: https://www.gnu.org/software/octave/download.html
+[BMML]: https://github.com/franloza/BMML
+[getData file]: /preprocess/preprocessing.m
